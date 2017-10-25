@@ -6,19 +6,21 @@ namespace LeagueGram
     {
         Guid Id { get; }
         IMessage[] Messages { get; set; }
-        IChatMember ChatMembers { get; }
+        IChatMember[] ChatMembers { get; set; }
 
-        bool IsItPossibleToSendMessage(IChatMember chatMember);
+        bool IsItPossibleToSendMessage(IUser chatMember);
 
-        void SendMessage(IChatMember chatMember, string Message);
+        void SendMessage(IUser chatMember, string Message);
 
-        void EditMessage(IChatMember chatMember, IMessage message, string newMessage);
+        void EditMessage(IUser chatMember, IMessage message, string newMessage);
 
-        void DeleteMessage(IChatMember chatMember, IMessage message);
+        void DeleteMessage(IUser chatMember, IMessage message);
 
-        void InviteUser(IChatMember inviter, IChatMember invitedPerson);
+        void InviteUser(IUser inviter, IUser invitedPerson);
 
-        void EditRoleOfChatMember(IChatMember editor, IChatMember editingPerson, ChatRole newRole);
+        void EditRoleOfChatMember(IUser editor, IUser editingPerson, ChatRole newRole);
+
+        bool IsChatMember(IUser chatMember);
 
     }
 }
