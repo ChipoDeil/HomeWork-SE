@@ -19,5 +19,7 @@ namespace LeagueGram
 
         void EditRoleOfChatMember(IUser editor, IUser editingPerson, ChatRole newRole);
 
+        IMessage FindMessageById(Guid messageId);
+
     }
 }

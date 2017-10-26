@@ -53,6 +53,8 @@
     <Compile Include="ChannelTester.cs" />
     <Compile Include="GroupTester.cs" />
     <Compile Include="ChatFactoryTester.cs" />
+    <Compile Include="LeagueGramTester.cs" />
+    <Compile Include="UserManagerTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

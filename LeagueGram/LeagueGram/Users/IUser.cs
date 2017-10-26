@@ -9,7 +9,7 @@ namespace LeagueGram
         Guid Id { get; }
         string NickName { get; }
 
-        IChat Chats { get; set; }
+        IChat[] Chats { get; set; }
 
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LeagueGram
 {
-    class Group : DefaultChat
+    internal class Group : DefaultChat
     {
         public override Guid Id { get; }
         public override IMessage[] Messages { get; set; }

@@ -9,11 +9,12 @@ namespace LeagueGram
         public Guid Id { get; }
 
         public string NickName { get; }
-        public IChat Chats { get; set; }
+        public IChat[] Chats { get; set; }
 
         public User(Guid id, string nickName) {
             Id = id;
             NickName = nickName;
+            Chats = new IChat[0];
         }
     }
 }

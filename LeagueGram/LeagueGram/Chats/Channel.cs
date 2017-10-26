@@ -11,6 +11,7 @@ namespace LeagueGram
         public override IMessage[] Messages { get; set; }
 
         public override IChatMember[] ChatMembers { get; set; }
+
         public override bool IsItPossibleToDeleteMessage(IUser chatMember, IMessage message)
         {
             return IsChatMember(chatMember) && FindChatMember(chatMember).Role == ChatRole.Creator && DoesMessageExist(message);
@@ -45,6 +46,5 @@ namespace LeagueGram
             Messages = new IMessage[0];
             Id = Guid.NewGuid();
         }
-
     }
 }
