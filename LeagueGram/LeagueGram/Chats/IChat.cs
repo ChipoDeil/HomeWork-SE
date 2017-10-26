@@ -8,7 +8,6 @@ namespace LeagueGram
         IMessage[] Messages { get; set; }
         IChatMember[] ChatMembers { get; set; }
 
-        bool IsItPossibleToSendMessage(IUser chatMember);
 
         void SendMessage(IUser chatMember, string Message);
 
@@ -19,8 +18,6 @@ namespace LeagueGram
         void InviteUser(IUser inviter, IUser invitedPerson);
 
         void EditRoleOfChatMember(IUser editor, IUser editingPerson, ChatRole newRole);
-
-        bool IsChatMember(IUser chatMember);
 
     }
 }
