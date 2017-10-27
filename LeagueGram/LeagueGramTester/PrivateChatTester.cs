@@ -9,6 +9,7 @@ namespace LeagueGramTester
         [TestMethod]
         public void SendMessage_HasMessageAdded()
         {
+
             //Arrange
             User person1 = new User(Guid.NewGuid(), "petya");
             User person2 = new User(Guid.NewGuid(), "katya");

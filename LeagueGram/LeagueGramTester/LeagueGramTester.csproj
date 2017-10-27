@@ -54,6 +54,7 @@
     <Compile Include="GroupTester.cs" />
     <Compile Include="ChatFactoryTester.cs" />
     <Compile Include="LeagueGramTester.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="UserManagerTester.cs" />
   </ItemGroup>
   <ItemGroup>

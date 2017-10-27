@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("PrivateChatTester")]
 namespace LeagueGram
 {
-    internal class LeagueGram
+    internal class LeagueGramHead
     {
-        ChatFactory chatFactory;
-        IUserManager userManager;
+        public ChatFactory chatFactory;
+        public IUserManager userManager;
         public Guid RegisterUser(string nickName)
         {
             return userManager.RegisterUser(nickName);
@@ -74,7 +75,7 @@ namespace LeagueGram
             return default(Guid[]);
         }
 
-        public LeagueGram() {
+        public LeagueGramHead() {
             chatFactory = new ChatFactory();
             userManager = new UserManager();
         }

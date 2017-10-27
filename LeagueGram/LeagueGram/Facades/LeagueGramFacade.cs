@@ -6,7 +6,7 @@ namespace LeagueGram
 {
     public class LeagueGramFacade
     {
-        LeagueGram leagueGram;
+        LeagueGramHead leagueGram;
         Guid RegisterUser() {
             return Guid.NewGuid();
         }
@@ -43,12 +43,12 @@ namespace LeagueGram
             leagueGram.EditRoleOfChatMember(changer, target, chatId, newRole);
         }
 
-        Guid[] GetChatsForUser() {
+        /*Guid[] GetChatsForUser() {
             return default(Guid[]);
-        }
+        }*/
 
         public LeagueGramFacade() {
-            leagueGram = new LeagueGram();
+            leagueGram = new LeagueGramHead();
         }
     }
 }

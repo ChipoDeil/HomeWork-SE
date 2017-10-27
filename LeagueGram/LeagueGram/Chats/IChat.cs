@@ -5,7 +5,7 @@ namespace LeagueGram
     public interface IChat
     {
         Guid Id { get; }
-        IMessage[] Messages { get; set; }
+        IMessage[] Messages { get; }
         IChatMember[] ChatMembers { get; set; }
 
 

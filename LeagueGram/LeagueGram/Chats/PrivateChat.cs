@@ -9,7 +9,7 @@ namespace LeagueGram
     {
         public override Guid Id { get; }
 
-        public override IMessage[] Messages { get; set; }
+        public override IMessage[] Messages { get; protected set; }
 
         public override IChatMember[] ChatMembers { get; set; }
 

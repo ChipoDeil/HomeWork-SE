@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LeagueGram
 {
     internal abstract class DefaultChat : IChat
     {
         public abstract Guid Id { get; }
-        public abstract IMessage[] Messages { get; set; }
+        public abstract IMessage[] Messages { get; protected set; }
         public abstract IChatMember[] ChatMembers { get; set; }
 
         public void DeleteMessage(IUser chatMember, IMessage message) {

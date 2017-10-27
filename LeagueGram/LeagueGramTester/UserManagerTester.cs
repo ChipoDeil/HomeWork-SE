@@ -58,10 +58,12 @@ namespace LeagueGramTester
             UserManager userManager = new UserManager();
             Guid id = userManager.RegisterUser("petya");
             IChat chat = new Group(userManager.GetUserById(id));
+            int expected = 1;
             //Act
             userManager.JoinChat(id, chat);
             //Assert
-            Assert.AreEqual(1, userManager.GetUserById(id).Chats.Length);
+            Assert.AreEqual(expected, userManager.GetUserById(id).Chats.Length);
         }
+
     }
 }
