@@ -9,6 +9,7 @@ namespace LeagueGram
     {
         public ChatFactory chatFactory;
         public IUserManager userManager;
+
         public Guid RegisterUser(string nickName)
         {
             return userManager.RegisterUser(nickName);
@@ -69,10 +70,16 @@ namespace LeagueGram
                                                             userManager.GetUserById(target), newRole);
         }
 
-        public Guid[] GetChatsForUser(Guid userId)
+        public IEnumerable<IChat> GetChatsForUser(Guid userId)
         {
-            List<IChat> listOfCurrentUserChats = new List<IChat>(userManager.GetUserById(userId).Chats);
-            return default(Guid[]);
+            IEnumerable<IChat> chats = new List<IChat>(userManager.GetUserById(userId).Chats);
+            return chats;
+        }
+
+        public IEnumerable<IMessage> GetMessagesForUser(Guid userId, Guid chatId) {
+            IEnumerable<IMessage> messages = new List<IMessage>(chatFactory.GetChatById(chatId)
+                                                .GetMessages(userManager.GetUserById(userId)));
+            return messages;
         }
 
         public LeagueGramHead() {

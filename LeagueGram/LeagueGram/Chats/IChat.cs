@@ -21,5 +21,7 @@ namespace LeagueGram
 
         IMessage FindMessageById(Guid messageId);
 
+        IMessage[] GetMessages(IUser user);
+
     }
 }

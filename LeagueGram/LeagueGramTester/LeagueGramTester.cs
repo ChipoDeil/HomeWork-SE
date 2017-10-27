@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueGram;
-
+using System.Collections.Generic;
 
 namespace LeagueGramTester
 {
@@ -120,6 +120,46 @@ namespace LeagueGramTester
 
             Guid chatId = leagueGram.CreateGroup(user1Id);
             leagueGram.SendMessage(user2Id, chatId, "lol");
+        }
+
+        [TestMethod]
+        public void TryToGetMessagesForUser_IsQuantityRight()
+        {
+            //Arrange
+            LeagueGramHead leagueGram = new LeagueGramHead();
+
+            Guid user1Id = leagueGram.RegisterUser("petya");
+
+            Guid chatId = leagueGram.CreateChannel(user1Id);
+            int expected = 3;
+            //Act
+            leagueGram.SendMessage(user1Id, chatId, "123");
+            leagueGram.SendMessage(user1Id, chatId, "123");
+            leagueGram.SendMessage(user1Id, chatId, "123");
+            IEnumerable<IMessage> messages =  leagueGram.GetMessagesForUser(user1Id, chatId);
+            List<IMessage> listOfMessages = new List<IMessage>(messages);
+            //Assert
+            Assert.AreEqual(expected, listOfMessages.Count);
+        }
+
+        [TestMethod]
+        public void TryToGetChatsForUser_IsQuantityRight()
+        {
+            //Arrange
+            LeagueGramHead leagueGram = new LeagueGramHead();
+
+            Guid user1Id = leagueGram.RegisterUser("petya");
+
+            Guid chat1Id = leagueGram.CreateChannel(user1Id);
+            Guid chat2Id = leagueGram.CreateGroup(user1Id);
+            Guid chat3Id = leagueGram.CreateChannel(user1Id);
+
+            int expected = 3;
+            //Act
+            IEnumerable<IChat> chats = leagueGram.GetChatsForUser(user1Id);
+            List<IChat> listOfChats = new List<IChat>(chats);
+            //Assert
+            Assert.AreEqual(expected, listOfChats.Count);
         }
     }
 }

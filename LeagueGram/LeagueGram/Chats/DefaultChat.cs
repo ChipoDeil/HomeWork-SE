@@ -70,6 +70,16 @@ namespace LeagueGram
 
         public abstract bool IsItPossibleToSendMessage(IUser chatMember);
 
+        public IMessage[] GetMessages(IUser chatMember) {
+            if (!IsItPossibleToGetMessages(chatMember))
+                throw new Exception("It is not possible to get messages for user");
+            return Messages;
+        }
+
+        public bool IsItPossibleToGetMessages(IUser chatMember) {
+            return IsChatMember(chatMember);
+        }
+
         public bool IsChatMember(IUser chatMember)
         {
             foreach (IChatMember locChatMember in ChatMembers)

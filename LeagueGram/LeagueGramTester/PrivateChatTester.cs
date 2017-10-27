@@ -146,5 +146,39 @@ namespace LeagueGramTester
             Assert.AreEqual(expected, messages[0].Text);
         }
 
+        [ExpectedException(typeof(Exception)), TestMethod]
+        public void TryToGetMessagesByNotAChatMember_IsItPossible()
+        {
+            User person1 = new User(Guid.NewGuid(), "petya");
+            User person2 = new User(Guid.NewGuid(), "katya");
+            User person3 = new User(Guid.NewGuid(), "lol");
+
+
+            PrivateChat privateChat = new PrivateChat(person1, person2);
+
+            privateChat.SendMessage(person1, "321");
+            privateChat.SendMessage(person2, "123");
+
+            privateChat.GetMessages(person3);
+        }
+
+        [TestMethod]
+        public void TryToGetMessagesByChatMember_IsItLenghtOfArrayRight()
+        {
+            //Arrange
+            User person1 = new User(Guid.NewGuid(), "petya");
+            User person2 = new User(Guid.NewGuid(), "katya");
+
+            PrivateChat privateChat = new PrivateChat(person1, person2);
+            privateChat.SendMessage(person1, "321");
+            privateChat.SendMessage(person2, "123");
+
+            int expected = 2;
+            //Act
+            IMessage[] messages = privateChat.GetMessages(person1);
+            //Assert
+            Assert.AreEqual(expected, messages.Length);
+        }
+
     }
 }

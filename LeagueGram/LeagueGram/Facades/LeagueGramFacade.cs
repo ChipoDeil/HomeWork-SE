@@ -43,9 +43,15 @@ namespace LeagueGram
             leagueGram.EditRoleOfChatMember(changer, target, chatId, newRole);
         }
 
-        /*Guid[] GetChatsForUser() {
-            return default(Guid[]);
-        }*/
+        public IEnumerable<IChat> GetChatsForUser(Guid userId)
+        {
+            return leagueGram.GetChatsForUser(userId);
+        }
+
+        public IEnumerable<IMessage> GetMessagesForUser(Guid userId, Guid chatId)
+        {
+            return leagueGram.GetMessagesForUser(userId, chatId);
+        }
 
         public LeagueGramFacade() {
             leagueGram = new LeagueGramHead();
