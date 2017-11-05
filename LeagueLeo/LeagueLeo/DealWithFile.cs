@@ -1,10 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeagueLeo
 {
@@ -23,9 +18,9 @@ namespace LeagueLeo
             }
             StreamReader io = new StreamReader(filePath + fileName);
             string json = io.ReadToEnd();
-            T file = JsonConvert.DeserializeObject<T>(json);
+            T content = JsonConvert.DeserializeObject<T>(json);
             io.Close();
-            return file;
+            return content;
         }
 
         internal void SaveToFile<T>(string filePath, string fileName, T @object)

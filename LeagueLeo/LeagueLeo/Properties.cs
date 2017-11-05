@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.IO;
 
 namespace LeagueLeo
 {
@@ -14,5 +7,11 @@ namespace LeagueLeo
         internal static string currentDirectory = Directory.GetCurrentDirectory() + "/data/";
 
         internal const string userFile = "userdata.json";
+
+        internal const string splitDirectory = "/split/";
+
+        internal const string wordFile = "globalwords.json";
+
+        internal const string vocFile = "vocabularies.json";
     }
 }

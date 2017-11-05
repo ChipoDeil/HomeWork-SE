@@ -45,11 +45,15 @@
   <ItemGroup>
     <Compile Include="DealWithFile.cs" />
     <Compile Include="InJsonUserRepository.cs" />
-    <Compile Include="IUser.cs" />
+    <Compile Include="InJsonUsersWordRepository.cs" />
+    <Compile Include="InJsonWordRepository.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="IUsersWordRepository.cs" />
+    <Compile Include="IWordRepository.cs" />
     <Compile Include="Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="Word.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -9,22 +9,24 @@ namespace LeagueLeoTests
     public class InJsonUserRepositoryTester
     {
         [TestMethod]
-        public void TestMethod1()
+        public void InsertTwoUsers_IsItPossibleToGetSecond()
         {
             //Arrange
             InJsonUserRepository rep = new InJsonUserRepository();
-            User user = new User("asda", Guid.NewGuid());
-            User user1 = new User("asdasds", Guid.NewGuid());
-            List<IUser> listOfUsers = new List<IUser>();
+            User user = new User("123", Guid.NewGuid());
+            User user2 = new User("123", Guid.NewGuid());
+            List<User> listOfUsers = new List<User>();
             listOfUsers.Add(user);
-            listOfUsers.Add(user1);
-            IUser expected = user1;
+            listOfUsers.Add(user2);
+            User expected = user2;
             //Act
             rep.SaveUser(user);
-            rep.SaveUser(user1);
-            IUser result = rep.LoadUser(user1.Id);
+            rep.SaveUser(user2);
+            User result = rep.LoadUser(user2.Id);
             //Assert
             Assert.AreEqual(expected.Id, result.Id);
         }
+
+        //боже как я заебался
     }
 }

@@ -3,7 +3,7 @@
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LeagueLeoTests")]
 namespace LeagueLeo
 {
-    internal class User : IUser
+    public class User
     {
         public string NickName { get; }
 
