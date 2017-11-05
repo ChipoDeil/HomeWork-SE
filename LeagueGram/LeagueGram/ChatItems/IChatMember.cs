@@ -11,6 +11,5 @@ namespace LeagueGram
         string NickName { get; }
 
         ChatRole Role { get; set; }
-
     }
 }

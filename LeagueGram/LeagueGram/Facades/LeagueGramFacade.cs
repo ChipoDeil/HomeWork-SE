@@ -7,39 +7,39 @@ namespace LeagueGram
     public class LeagueGramFacade
     {
         LeagueGramHead leagueGram;
-        Guid RegisterUser() {
+        public Guid RegisterUser() {
             return Guid.NewGuid();
         }
 
-        void SendMessage(Guid userId, Guid chatId, string message) {
+        public void SendMessage(Guid userId, Guid chatId, string message) {
             leagueGram.SendMessage(userId, chatId, message);
         }
 
-        void DeleteMessage(Guid userId, Guid chatId, Guid messageId) {
+        public void DeleteMessage(Guid userId, Guid chatId, Guid messageId) {
             leagueGram.DeleteMessage(userId, chatId, messageId);
         }
 
-        void EditMessage(Guid userId, Guid chatId, Guid messageId, string newMessage) {
+        public void EditMessage(Guid userId, Guid chatId, Guid messageId, string newMessage) {
             leagueGram.EditMessage(userId, chatId, messageId, newMessage);
         }
 
-        Guid CreatePrivateChat(Guid userId, Guid invitedPerson) {
+        public Guid CreatePrivateChat(Guid userId, Guid invitedPerson) {
             return leagueGram.CreatePrivateChat(userId, invitedPerson);
         }
 
-        Guid CreateGroup(Guid userId) {
+        public Guid CreateGroup(Guid userId) {
             return leagueGram.CreateGroup(userId);
         }
 
-        Guid CreateChannel(Guid userId) {
+        public Guid CreateChannel(Guid userId) {
             return leagueGram.CreateChannel(userId);
         }
 
-        void InviteUserToChat(Guid inviterId, Guid invitedPersonId, Guid chatId) {
+        public void InviteUserToChat(Guid inviterId, Guid invitedPersonId, Guid chatId) {
             leagueGram.InviteUserToChat(inviterId, invitedPersonId, chatId); 
         }
 
-        void EditRoleOfChatMember(Guid changer, Guid target, Guid chatId, ChatRole newRole) {
+        public void EditRoleOfChatMember(Guid changer, Guid target, Guid chatId, ChatRole newRole) {
             leagueGram.EditRoleOfChatMember(changer, target, chatId, newRole);
         }
 
