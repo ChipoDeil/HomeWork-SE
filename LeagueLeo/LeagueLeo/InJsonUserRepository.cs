@@ -17,11 +17,21 @@ namespace LeagueLeo
 
         public User LoadUser(Guid userId)
         {
-            return listOfUsers.Find(current => current.Id == userId);
+            User user = listOfUsers.Find(current => current.Id == userId);
+            if (user == null)
+                throw new ArgumentException("user not found"); 
+            return user;
         }
 
         public void SaveUser(User user)
         {
+            if (user == null)
+                throw new ArgumentNullException();
+
+            bool currentUser = listOfUsers.Any(current => current.Id == user.Id);
+            if (currentUser)
+                throw new ArgumentException("user already exists");
+
             listOfUsers.Add(user);
             dealWithFile.SaveToFile(pathFile, userFile, listOfUsers);
         }

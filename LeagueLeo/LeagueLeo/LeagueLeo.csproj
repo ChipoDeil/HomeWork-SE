@@ -44,6 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DealWithFile.cs" />
+    <Compile Include="Facades\GameSprint.cs" />
+    <Compile Include="Facades\GlobalDictionaryManager.cs" />
+    <Compile Include="Facades\IGameSprint.cs" />
+    <Compile Include="Facades\IGlobalDictionaryManager.cs" />
+    <Compile Include="Facades\IUserManager.cs" />
+    <Compile Include="Facades\IUsersWordRepositoryManager.cs" />
+    <Compile Include="Facades\UserManager.cs" />
+    <Compile Include="Facades\UsersWordRepositoryManager.cs" />
     <Compile Include="InJsonUserRepository.cs" />
     <Compile Include="InJsonUsersWordRepository.cs" />
     <Compile Include="InJsonWordRepository.cs" />

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LeagueLeo
 {
@@ -15,14 +12,24 @@ namespace LeagueLeo
 
         public Word LoadWord(Guid wordId)
         {
-            return listOfWords.Find(current => current.Id == wordId);
+            Word word = listOfWords.Find(current => current.Id == wordId);
+            if (word == null)
+                throw new ArgumentException("word not found");
+            return word;
         }
 
         public void SaveWord(Word word)
         {
+            if (word == null)
+                throw new ArgumentNullException();
             listOfWords.Add(word);
             dealWithFile.SaveToFile(pathFile, wordFile, listOfWords);
 
+        }
+
+        public IEnumerable<Word> LoadAllWords()
+        {
+            return listOfWords.ToArray();
         }
 
         public InJsonWordRepository() {

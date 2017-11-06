@@ -27,6 +27,32 @@ namespace LeagueLeoTests
             Assert.AreEqual(expected.Id, result.Id);
         }
 
-        //боже как я заебался
+        [ExpectedException(typeof(ArgumentException)),TestMethod]
+        public void LoadNotExistingUser_IsItPossible()
+        {
+            //Arrange
+            InJsonUserRepository rep = new InJsonUserRepository();
+            Guid id = Guid.NewGuid();
+            rep.LoadUser(id);
+        }
+
+        [ExpectedException(typeof(ArgumentNullException)), TestMethod]
+        public void TryToSaveNullUser_IsItPossible()
+        {
+            //Arrange
+            InJsonUserRepository rep = new InJsonUserRepository();
+            User user = null;
+            rep.SaveUser(user);
+        }
+
+        [ExpectedException(typeof(ArgumentException)), TestMethod]
+        public void TryToSaveAlreadyExistingUser_IsItPossible()
+        {
+            //Arrange
+            InJsonUserRepository rep = new InJsonUserRepository();
+            User user = new User("pasha", Guid.NewGuid());
+            rep.SaveUser(user);
+            rep.SaveUser(user);
+        }
     }
 }

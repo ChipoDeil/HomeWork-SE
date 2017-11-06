@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace LeagueLeo
 {
@@ -6,5 +8,6 @@ namespace LeagueLeo
     {
         Word LoadWord(Guid wordId);
         void SaveWord(Word word);
+        IEnumerable<Word> LoadAllWords();
     }   
 }

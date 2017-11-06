@@ -50,7 +50,11 @@
   <ItemGroup>
     <Compile Include="InJsonUserRepositoryTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InJsonUsersWordrepositoryTester.cs" />
+    <Compile Include="InJsonUsersWordRepositoryTester.cs" />
+    <Compile Include="GameSprintTester.cs" />
+    <Compile Include="InJsonWordRepositoryTester.cs" />
+    <Compile Include="UserManagerTester.cs" />
+    <Compile Include="UsersWordRepositoryManagerTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

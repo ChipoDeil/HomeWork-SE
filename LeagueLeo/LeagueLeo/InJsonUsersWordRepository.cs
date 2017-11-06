@@ -14,14 +14,10 @@ namespace LeagueLeo
         public void AddPointsToWordForUser(Guid userId, Word word)
         {
             if (!vocForUsers.ContainsKey(userId))
-            {
-                //throw new exeption
-            }
+                throw new KeyNotFoundException();
 
             if (vocForUsers[userId].Find(current => current.Id == word.Id) == null)
-            {
-                //throw new exeption
-            }
+                throw new ArgumentException("word does not exist");
 
             vocForUsers[userId].Find(current => current.Id == word.Id).AddPoint();
             dealWithFile.SaveToFile(pathFile, fileName, vocForUsers);
@@ -41,6 +37,8 @@ namespace LeagueLeo
 
         public IEnumerable<Word> LoadWordsForUser(Guid userId)
         {
+            if (!(vocForUsers.Any(current => current.Key == userId)))
+                throw new ArgumentException();
             return vocForUsers.First(current => current.Key== userId).Value.ToArray();
         }
 
