@@ -8,7 +8,7 @@ namespace LeagueLeo
         public Guid AddWord(Word word)
         {
             if (word == null)
-                throw new Exception();
+                throw new ArgumentNullException();
             Guid wordId = Guid.NewGuid();
             Word newWord = new Word(word.Original, word.Translation, wordId);
             _wordRepository.SaveWord(word);
@@ -18,8 +18,6 @@ namespace LeagueLeo
         public Word GetWord(Guid wordId)
         {
             Word requestedWord = _wordRepository.LoadWord(wordId);
-            if (requestedWord == null)
-                throw new Exception();
             return requestedWord;
         }
 
@@ -29,7 +27,7 @@ namespace LeagueLeo
         }
 
         public GlobalDictionaryManager(IWordRepository wordRepository) {
-            _wordRepository = wordRepository;
+            _wordRepository = wordRepository ?? throw new ArgumentNullException();
         }
 
         private readonly IWordRepository _wordRepository;

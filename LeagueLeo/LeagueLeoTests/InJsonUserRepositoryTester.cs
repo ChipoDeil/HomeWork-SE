@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueLeo;
 using System.Collections.Generic;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeoTests
 {
@@ -27,7 +28,7 @@ namespace LeagueLeoTests
             Assert.AreEqual(expected.Id, result.Id);
         }
 
-        [ExpectedException(typeof(ArgumentException)),TestMethod]
+        [ExpectedException(typeof(UserNotFoundException)),TestMethod]
         public void LoadNotExistingUser_IsItPossible()
         {
             //Arrange
@@ -45,7 +46,7 @@ namespace LeagueLeoTests
             rep.SaveUser(user);
         }
 
-        [ExpectedException(typeof(ArgumentException)), TestMethod]
+        [ExpectedException(typeof(UserAlreadyExistsException)), TestMethod]
         public void TryToSaveAlreadyExistingUser_IsItPossible()
         {
             //Arrange

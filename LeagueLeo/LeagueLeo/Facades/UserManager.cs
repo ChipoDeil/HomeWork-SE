@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LeagueLeo.Facades
 {
@@ -14,9 +15,15 @@ namespace LeagueLeo.Facades
             return userId;
         }
 
-        public UserManager(IUserRepository userRepository) {
-            _userRepository = userRepository;
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
         }
+
+        public UserManager(IUserRepository userRepository) {
+            _userRepository = userRepository ?? throw new ArgumentNullException();
+        }
+
 
         private readonly IUserRepository _userRepository;
     }

@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DealWithFile.cs" />
+    <Compile Include="Domain\DealWithFile.cs" />
+    <Compile Include="Domain\Exception\NotEnoughUnstudiedWordsToStartSprintException.cs" />
+    <Compile Include="Domain\Exception\UserAlreadyExistsException.cs" />
+    <Compile Include="Domain\Exception\UserNotFoundException.cs" />
+    <Compile Include="Domain\Exception\WordAlreadyStudiedException.cs" />
+    <Compile Include="Domain\Exception\WordNotFoundException.cs" />
     <Compile Include="Facades\GameSprint.cs" />
     <Compile Include="Facades\GlobalDictionaryManager.cs" />
     <Compile Include="Facades\IGameSprint.cs" />
@@ -52,16 +57,16 @@
     <Compile Include="Facades\IUsersWordRepositoryManager.cs" />
     <Compile Include="Facades\UserManager.cs" />
     <Compile Include="Facades\UsersWordRepositoryManager.cs" />
-    <Compile Include="InJsonUserRepository.cs" />
-    <Compile Include="InJsonUsersWordRepository.cs" />
-    <Compile Include="InJsonWordRepository.cs" />
-    <Compile Include="IUserRepository.cs" />
-    <Compile Include="IUsersWordRepository.cs" />
-    <Compile Include="IWordRepository.cs" />
-    <Compile Include="Properties.cs" />
+    <Compile Include="Infrastructure\InJsonUserRepository.cs" />
+    <Compile Include="Infrastructure\InJsonUsersWordRepository.cs" />
+    <Compile Include="Infrastructure\InJsonWordRepository.cs" />
+    <Compile Include="Domain\IUserRepository.cs" />
+    <Compile Include="Domain\IUsersWordRepository.cs" />
+    <Compile Include="Domain\IWordRepository.cs" />
+    <Compile Include="AppProperties\Properties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="Word.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Word.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

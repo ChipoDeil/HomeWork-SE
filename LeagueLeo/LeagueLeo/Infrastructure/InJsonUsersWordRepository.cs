@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeagueLeo.Domain.Exception;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace LeagueLeo
                 throw new KeyNotFoundException();
 
             if (vocForUsers[userId].Find(current => current.Id == word.Id) == null)
-                throw new ArgumentException("word does not exist");
+                throw new WordNotFoundException(word.Id);
 
             vocForUsers[userId].Find(current => current.Id == word.Id).AddPoint();
             dealWithFile.SaveToFile(pathFile, fileName, vocForUsers);
@@ -38,7 +39,7 @@ namespace LeagueLeo
         public IEnumerable<Word> LoadWordsForUser(Guid userId)
         {
             if (!(vocForUsers.Any(current => current.Key == userId)))
-                throw new ArgumentException();
+                throw new UserNotFoundException(userId);
             return vocForUsers.First(current => current.Key== userId).Value.ToArray();
         }
 

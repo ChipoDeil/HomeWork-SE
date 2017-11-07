@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueLeo;
 using System.Collections.Generic;
 using System.Linq;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeoTests
 {
@@ -60,7 +61,7 @@ namespace LeagueLeoTests
             usersWord.AddPointsToWordForUser(userId, word);
         }
 
-        [ExpectedException(typeof(ArgumentException)), TestMethod]
+        [ExpectedException(typeof(WordNotFoundException)), TestMethod]
         public void AddPointsForNotExistingWord_IsItPossible()
         {
             InJsonUsersWordRepository usersWord = new InJsonUsersWordRepository();
@@ -71,7 +72,7 @@ namespace LeagueLeoTests
             usersWord.AddPointsToWordForUser(userId, word);
         }
 
-        [ExpectedException(typeof(ArgumentException)), TestMethod]
+        [ExpectedException(typeof(UserNotFoundException)), TestMethod]
         public void GetWordsForNotExistingUser_IsItPossible()
         {
             InJsonUsersWordRepository usersWord = new InJsonUsersWordRepository();

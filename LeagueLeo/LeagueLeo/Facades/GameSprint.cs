@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeo.Facades
 {
@@ -10,10 +9,11 @@ namespace LeagueLeo.Facades
     {
         public Word GetRandomCombination()
         {
+
             List<Word> listOfUsersWords = _usersWordRepository.LoadWordsForUser(currentUserId).ToList();
             List<Word> unstudied = listOfUsersWords.FindAll(current => current.Points < pointsToTreatWordAsStudied);
 
-            int randomTranslationIndex = random.Next(0, unstudied.Count-1);
+            int randomTranslationIndex = random.Next(0, unstudied.Count - 1);
             int randomOriginalIndex = random.Next(0, unstudied.Count - 1);
 
             Word randomTranslation = unstudied[randomTranslationIndex];
@@ -26,8 +26,6 @@ namespace LeagueLeo.Facades
 
         public IEnumerable<Word> GetUnstudiedWords()
         {
-            if (currentUserId == null)
-                throw new ArgumentNullException(); 
 
             List<Word> listOfUsersWords = _usersWordRepository.LoadWordsForUser(currentUserId).ToList();
 
@@ -36,7 +34,8 @@ namespace LeagueLeo.Facades
 
         public bool IsAnswerRight(string original, string translation, bool right)
         {
-            if(original == null || translation == null)
+
+            if (original == null || translation == null)
                 throw new ArgumentNullException(); 
 
             List<Word> listOfUsersWords = _usersWordRepository.LoadWordsForUser(currentUserId).ToList();
@@ -45,10 +44,10 @@ namespace LeagueLeo.Facades
             Word currentWord = unstudied.Find(current => current.Original == original);
 
             if (currentWord == null)
-                throw new Exception(); // word not found
+                throw new WordNotFoundException("word " + original + " not found");
 
             if (currentWord.Points >= pointsToTreatWordAsStudied)
-                throw new Exception(); // word already studied
+                throw new WordAlreadyStudiedException(currentWord.Id);
 
             if (currentWord.Translation == translation && right || !right && currentWord.Translation != translation) {
                 _usersWordRepository.AddPointsToWordForUser(currentUserId, currentWord);
@@ -58,7 +57,7 @@ namespace LeagueLeo.Facades
             return false;
         }
 
-        public void StartGameForUser(Guid userId)
+        private void StartGameForUser(Guid userId)
         {
             if (userId == null)
                 throw new ArgumentNullException();
@@ -67,13 +66,14 @@ namespace LeagueLeo.Facades
             List<Word> listOfWords = _usersWordRepository.LoadWordsForUser(userId).ToList();
             List<Word> unstudied = listOfWords.FindAll(current => current.Points < pointsToTreatWordAsStudied);
             if (unstudied.Count < minWordForSprint)
-                throw new Exception(); // impossible to start sprint 
+                throw new NotEnoughUnstudiedWordsToStartSprintException(userId);
             currentUserId = userId;
         }
 
-        public GameSprint(IUsersWordRepository usersWordRepository, IUserRepository userRepository) {
+        public GameSprint(IUsersWordRepository usersWordRepository, IUserRepository userRepository, Guid userId) {
             _usersWordRepository = usersWordRepository;
             _userRepository = userRepository;
+            StartGameForUser(userId);
         }
 
         private readonly IUsersWordRepository _usersWordRepository;

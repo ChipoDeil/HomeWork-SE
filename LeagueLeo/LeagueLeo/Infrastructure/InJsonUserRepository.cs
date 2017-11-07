@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeo
 {
@@ -19,7 +16,7 @@ namespace LeagueLeo
         {
             User user = listOfUsers.Find(current => current.Id == userId);
             if (user == null)
-                throw new ArgumentException("user not found"); 
+                throw new UserNotFoundException(userId); 
             return user;
         }
 
@@ -30,10 +27,15 @@ namespace LeagueLeo
 
             bool currentUser = listOfUsers.Any(current => current.Id == user.Id);
             if (currentUser)
-                throw new ArgumentException("user already exists");
+                throw new UserAlreadyExistsException(user.Id);
 
             listOfUsers.Add(user);
             dealWithFile.SaveToFile(pathFile, userFile, listOfUsers);
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return listOfUsers.ToArray();
         }
 
         public InJsonUserRepository() {

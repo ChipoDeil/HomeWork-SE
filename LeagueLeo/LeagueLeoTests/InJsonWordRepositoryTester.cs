@@ -3,26 +3,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueLeo;
 using System.Linq;
 using System.Collections.Generic;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeoTests
 {
     [TestClass]
     public class InJsonWordRepositoryTester
     {
-        [TestMethod]
-        public void TryToLoadWordsFromFile_IsLengthRight()
-        {
-            //Arrange
-            InJsonWordRepository wordRepository = new InJsonWordRepository();
-            List<Word> listOfWords = wordRepository.LoadAllWords().ToList();
-            int expected = 10;
-            //Act
-            int count = listOfWords.Count;
-            //Assert
-            Assert.AreEqual(expected, count);
-        }
 
-        [ExpectedException(typeof(ArgumentException)) ,TestMethod]
+        [ExpectedException(typeof(WordNotFoundException)) ,TestMethod]
         public void TryToLoadFakeWordFromFile_IsItPossible()
         {
             InJsonWordRepository wordRepository = new InJsonWordRepository();

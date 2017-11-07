@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace LeagueLeo.Facades
 {
@@ -11,6 +7,5 @@ namespace LeagueLeo.Facades
         Word GetRandomCombination();
         bool IsAnswerRight(string original, string translation, bool right);
         IEnumerable<Word> GetUnstudiedWords();
-        void StartGameForUser(Guid userId);
     }
 }

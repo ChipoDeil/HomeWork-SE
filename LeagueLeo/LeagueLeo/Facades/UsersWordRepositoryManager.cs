@@ -7,9 +7,7 @@ namespace LeagueLeo.Facades
     {
         public Guid AddWordForUser(Word word, Guid userId)
         {
-            if (word == null)
-                throw new ArgumentNullException();
-            if (userId == null)
+            if (word == null || userId == null)
                 throw new ArgumentNullException();
             _userRepository.LoadUser(userId);
             Guid newId = Guid.NewGuid();
@@ -27,13 +25,11 @@ namespace LeagueLeo.Facades
         }
 
         public UsersWordRepositoryManager(IUsersWordRepository usersWordRepository, IUserRepository userRepository) {
-            _usersWordRepository = usersWordRepository;
-            _userRepository = userRepository;
+            _usersWordRepository = usersWordRepository ?? throw new ArgumentNullException();
+            _userRepository = userRepository ?? throw new ArgumentNullException();
         }
 
         private readonly IUsersWordRepository _usersWordRepository;
         private readonly IUserRepository _userRepository;
-
-
     }
 }

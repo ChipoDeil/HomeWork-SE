@@ -53,6 +53,7 @@
     <Compile Include="InJsonUsersWordRepositoryTester.cs" />
     <Compile Include="GameSprintTester.cs" />
     <Compile Include="InJsonWordRepositoryTester.cs" />
+    <Compile Include="GlobalDictionaryManagerTester.cs" />
     <Compile Include="UserManagerTester.cs" />
     <Compile Include="UsersWordRepositoryManagerTester.cs" />
   </ItemGroup>

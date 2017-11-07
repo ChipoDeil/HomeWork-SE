@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueLeo;
 using LeagueLeo.Facades;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LeagueLeoTests
 {
@@ -47,6 +49,29 @@ namespace LeagueLeoTests
             User user2 = userRepository.LoadUser(userId2);
             //Assert
             Assert.AreEqual(expected, user1.NickName+user2.NickName);
+        }
+
+        [ExpectedException(typeof(ArgumentNullException)) ,TestMethod]
+        public void TryCreateFacadeWithNullArgument_IsItPossible()
+        {
+            InJsonUserRepository userRepository = null;
+            UserManager userManager = new UserManager(userRepository);
+        }
+
+        [TestMethod]
+        public void AddNewUser_HasItAdded()
+        {
+            //Arrange
+            InJsonUserRepository userRepository = new InJsonUserRepository();
+            UserManager userManager = new UserManager(userRepository);
+            List<User> listOfUsers = userManager.GetAllUsers().ToList();
+            int expected = listOfUsers.Count + 1;
+            //Act
+            userManager.AddUser("newUser");
+            listOfUsers = userManager.GetAllUsers().ToList();
+            int result = listOfUsers.Count;
+            //Assert
+            Assert.AreEqual(expected, result);
         }
     }
 }

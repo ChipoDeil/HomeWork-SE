@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LeagueLeo.Domain.Exception;
+using System;
 using System.Collections.Generic;
 
 namespace LeagueLeo
@@ -14,7 +15,7 @@ namespace LeagueLeo
         {
             Word word = listOfWords.Find(current => current.Id == wordId);
             if (word == null)
-                throw new ArgumentException("word not found");
+                throw new WordNotFoundException(wordId);
             return word;
         }
 

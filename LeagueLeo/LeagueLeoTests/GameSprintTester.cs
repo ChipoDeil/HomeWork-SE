@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using LeagueLeo;
 using LeagueLeo.Facades;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeoTests
 {
@@ -16,7 +17,6 @@ namespace LeagueLeoTests
             InJsonUserRepository userRepository = new InJsonUserRepository();
 
             UsersWordRepositoryManager usersWord = new UsersWordRepositoryManager(usersWordRepository, userRepository);
-            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository);
             UserManager userManager = new UserManager(userRepository);
 
             Guid userId = userManager.AddUser("someone");
@@ -26,9 +26,9 @@ namespace LeagueLeoTests
             usersWord.AddWordForUser(word2, userId);
             Word word3 = new Word("child", "ребенок", Guid.NewGuid());
             usersWord.AddWordForUser(word3, userId);
-            //Act
-            gameSprint.StartGameForUser(userId);
+            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository, userId);
 
+            //Act
             Word word = gameSprint.GetRandomCombination();
             bool result = word.Original == word1.Original ||
                         word.Original == word2.Original ||
@@ -38,14 +38,13 @@ namespace LeagueLeoTests
             Assert.IsTrue(result);
         }
 
-        [ExpectedException(typeof(Exception)), TestMethod]
+        [ExpectedException(typeof(NotEnoughUnstudiedWordsToStartSprintException)), TestMethod]
         public void TryToStartSprintWithOnlyTwoWords_IsItPossible()
         {
             InJsonUsersWordRepository usersWordRepository = new InJsonUsersWordRepository();
             InJsonUserRepository userRepository = new InJsonUserRepository();
 
             UsersWordRepositoryManager usersWord = new UsersWordRepositoryManager(usersWordRepository, userRepository);
-            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository);
             UserManager userManager = new UserManager(userRepository);
 
             Guid userId = userManager.AddUser("someone");
@@ -53,18 +52,17 @@ namespace LeagueLeoTests
             usersWord.AddWordForUser(word1, userId);
             Word word2 = new Word("mother", "мама", Guid.NewGuid());
             usersWord.AddWordForUser(word2, userId);
+            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository, userId);
 
-            gameSprint.StartGameForUser(userId);
         }
 
-        [ExpectedException(typeof(Exception)), TestMethod]
+        [ExpectedException(typeof(NotEnoughUnstudiedWordsToStartSprintException)), TestMethod]
         public void TryToStartSprintWithOnlyTwoUnstudiedWords_IsItPossible()
         {
             InJsonUsersWordRepository usersWordRepository = new InJsonUsersWordRepository();
             InJsonUserRepository userRepository = new InJsonUserRepository();
 
             UsersWordRepositoryManager usersWord = new UsersWordRepositoryManager(usersWordRepository, userRepository);
-            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository);
             UserManager userManager = new UserManager(userRepository);
 
             Guid userId = userManager.AddUser("someone");
@@ -79,7 +77,7 @@ namespace LeagueLeoTests
             usersWordRepository.AddPointsToWordForUser(userId, word3);
             usersWordRepository.AddPointsToWordForUser(userId, word3);
 
-            gameSprint.StartGameForUser(userId);
+            GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository, userId);
         }
     }
 }

@@ -7,6 +7,5 @@ namespace LeagueLeo.Facades
     {
         Guid AddWordForUser(Word word, Guid userId);
         IEnumerable<Word> LoadWordsForUser(Guid userId);
-
     }
 }

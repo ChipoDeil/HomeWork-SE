@@ -4,13 +4,14 @@ using LeagueLeo.Facades;
 using LeagueLeo;
 using System.Collections.Generic;
 using System.Linq;
+using LeagueLeo.Domain.Exception;
 
 namespace LeagueLeoTests
 {
     [TestClass]
     public class UsersWordRepositoryManagerTester
     {
-        [ExpectedException(typeof(ArgumentException)), TestMethod]
+        [ExpectedException(typeof(UserNotFoundException)), TestMethod]
         public void TryToGetWordsForNotExistingUser_IsItPossible()
         {
             InJsonUsersWordRepository usersWordRepository = new InJsonUsersWordRepository();
@@ -54,6 +55,16 @@ namespace LeagueLeoTests
             Guid userId = userManager.AddUser("someone");
             Word word = null;
             usersWord.AddWordForUser(word, userId);
+        }
+
+        [ExpectedException(typeof(ArgumentNullException)), TestMethod]
+        public void TryToCreateFacadeWithNullArgument_IsItPossible()
+        {
+            InJsonUsersWordRepository usersWordRepository = null;
+            InJsonUserRepository userRepository = new InJsonUserRepository();
+
+            UsersWordRepositoryManager usersWord = new UsersWordRepositoryManager(usersWordRepository,
+                                                                                    userRepository);
         }
     }
 }
