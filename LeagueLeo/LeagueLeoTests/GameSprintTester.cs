@@ -27,13 +27,11 @@ namespace LeagueLeoTests
             Word word3 = new Word("child", "ребенок", Guid.NewGuid());
             usersWord.AddWordForUser(word3, userId);
             GameSprint gameSprint = new GameSprint(usersWordRepository, userRepository, userId);
-
             //Act
-            Word word = gameSprint.GetRandomCombination();
+            Word word = gameSprint.GetRandomWord();
             bool result = word.Original == word1.Original ||
                         word.Original == word2.Original ||
-                        word.Original == word2.Original;
-
+                        word.Original == word3.Original;
             //Assert
             Assert.IsTrue(result);
         }

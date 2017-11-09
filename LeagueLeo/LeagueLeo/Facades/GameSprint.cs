@@ -7,14 +7,14 @@ namespace LeagueLeo.Facades
 {
     public class GameSprint : IGameSprint
     {
-        public Word GetRandomCombination()
+        public Word GetRandomWord()
         {
 
             List<Word> listOfUsersWords = _usersWordRepository.LoadWordsForUser(currentUserId).ToList();
             List<Word> unstudied = listOfUsersWords.FindAll(current => current.Points < pointsToTreatWordAsStudied);
 
-            int randomTranslationIndex = random.Next(0, unstudied.Count - 1);
-            int randomOriginalIndex = random.Next(0, unstudied.Count - 1);
+            int randomTranslationIndex = random.Next(0, unstudied.Count);
+            int randomOriginalIndex = random.Next(0, unstudied.Count);
 
             Word randomTranslation = unstudied[randomTranslationIndex];
             Word randomOriginal = unstudied[randomOriginalIndex];
@@ -59,9 +59,6 @@ namespace LeagueLeo.Facades
 
         private void StartGameForUser(Guid userId)
         {
-            if (userId == null)
-                throw new ArgumentNullException();
-
             _userRepository.LoadUser(userId);
             List<Word> listOfWords = _usersWordRepository.LoadWordsForUser(userId).ToList();
             List<Word> unstudied = listOfWords.FindAll(current => current.Points < pointsToTreatWordAsStudied);
