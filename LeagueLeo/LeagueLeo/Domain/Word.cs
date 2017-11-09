@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace LeagueLeo
 {
@@ -15,12 +16,22 @@ namespace LeagueLeo
         {
             Points++;
         }
-        public Word(string original, string translation, Guid id) {
+
+        [JsonConstructor]
+        public Word(string original, string translation, Guid id, int points)
+        {
             Original = original;
             Translation = translation;
             Id = id;
-            Points = 0;
+            Points = points;
+        }
+        public Word(string original, string translation, Guid id)
+        {
+            Original = original;
+            Translation = translation;
+            Id = id;
         }
         
+
     }
 }
